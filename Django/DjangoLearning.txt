@@ -1,0 +1,31 @@
+Django: 
+    it is a python framework that makes it easier to create web sites using python
+    django take care of difficult stuff so that you can concentrate on building your web applications
+    djano emphasizes reusability of components also referred to as DRY(Dont repeat yourself) and comes with ready to use features like login system,  db connection and CRUD operations
+
+how does Django work?
+    Django will follow MVT design pattern
+        Model: the data you want to present usually data from a database
+        View: a request handler that returns the relevent template and content - based on request from the user.
+        Template : A text file(like a html file) contains the layout of webpage with logic on how to display data.
+
+    
+    MODEL: model provides data from database. the models are usually located in models.py
+        -the data is delivered as an ORM(object relational mapping) which is a technique designed to make it 
+         easier to work with database.
+        -the most common way to extract data from db is SQL.
+        -Django with ORM makes it easier to communicate with db without having to write complex SQL statements.
+
+    View:the views are usually located in views.py
+            A view is a function or method that keeps http request as argument,
+            imports the relevant models and finds out what data to send to template 
+            and returns the final result.
+
+    Template: the template of an application is located in folder names templates.
+        it is a file where we can describe how the result should be represented.
+        templates are mostly in html code describing the layout of webpage.
+        Django uses standard HTML to describe the layout. but uses Django tags to add logic 
+            <h1> My home </h1>
+            <p> my name is {{first name}} </p>
+    
+    
