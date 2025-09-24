@@ -28,4 +28,25 @@ how does Django work?
             <h1> My home </h1>
             <p> my name is {{first name}} </p>
     
-    
+    URLS: this will be done in a file called urls.py 
+        Django also provides a way to navigate around the different pages in a website.
+        when a user request a URL Django decides whicih view it will send it to.
+
+working flow of Django :
+
+    django receives the URL checks urls.py file and call the view matches the URL.
+    the view located in views.py checks for relevant models.
+    the models are imported from models.py 
+    the view then sends data to specified template in template folder.
+    the template contains html and django tags and with data it returns finished html content back to browser.
+
+DJANGO CREATE PROJECT 
+
+    command for create project: django-admin startproject project_name
+
+Django APP: 
+    app is a web application that has a specific meansing in your project.
+    we can create an app that allows us to list and register members in db.
+
+    command for creating app: python manage.py startapp appname
+
