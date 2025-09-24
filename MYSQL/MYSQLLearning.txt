@@ -24,5 +24,77 @@ Where clause: it is used to filter records. to extract only those records that f
         from table_name 
         where condition;
 
+Text field vs numeric fields: 
+        SQL requires single qoute around text values(most db sys will also allow double qoutes)
+            select * from customers where customerID =1;
 
+Operators in the where clause: 
+    = equal
+    > grater than 
+    < less than 
+    >= greater than or equal 
+    <= less than or equal 
+    <> not equal 
+    BETWEEN : between a certain range
+    LIKE : search for pattern 
+    IN : To specify multiply possible values for a column
+
+
+The MYSQL AND, OR, NOT Operators:
+    the where clause can be combined with AND, OR, NOT operators 
+
+    AND, OR, operators are used to filter the records based on more than one condition: 
+        AND : displays a record if all the conditions seperated by AND are TRUE
+                    SELECT col1, col2,.. from table where condition1 and condition2 and condition3..;
+
+        OR  : displays a record if any of the condition seperated by OR is true 
+                    SELECT col1, col2, .. from table where condition1 or condition2 or condition3;
+
+    the NOT operator displays a record if the condition is not true
+                    select col1, col2,.. from table where not condition;
+
+ORDER BY: 
+    it is used to sort the result-set in ascending or descending order.
+    it sorts the records in ascending order by default. to sort the records in descending order, use the DESC keyword.
+
+            SELECT col1, col2,.. from table_name ORDER BY col1, col2,.. ASC|DESC;
+
+INSERT INTO: it is used to insert new records in a table.
+    1. specify both the column names and the values to be instead:
+            INSERT INTO table (col1, col2, col3,..)
+            VALUES (val1, val2, val3,..);
+    2. without column names inserting values based on positions 
+            INSERT INTO table VALUES(val1, val2, val3);
+
+    3. Inserting data only in specified columns : to insert only on specified column we need mention required col names
+
+
+NULL VALUE: a field with a null val is a field with no value.
+    if a field in a table is optional it is possible to insert a new record or update a record without adding a value to this field.
+    then the field will be saved with a NULL value.
+
+HOW to test NULL values?
+    it is not possible to test for NULL values with comparision operator such as =, <, or <>.
+    we have to use the IS NULL and IS NOT NULL operators instead.
+
+    IS NULL SYNTAX:
+        select col_names 
+        from table 
+        where col_name IS NULL;
+    
+    IS NOT NULL SYNTAX:
+        select col_name
+        from table
+        where col_name IS NOT NULL;
+
+UPDATE:
+    it is used to modify the existing records in a table
+        update table_name set col_name=val where condition;
+
+
+    NOTE: be careful while updating records in a table! notice the where clause in the update statement.
+            the where clause specifies which records that should be updated. if you omit the where clause all records in table will be updated.
+
+UPDATE MULTIPLE RECORDS:
+        it is the where clause that determined how many records will be updated.
 
