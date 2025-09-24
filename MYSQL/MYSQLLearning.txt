@@ -1,0 +1,28 @@
+MYSQL: 
+    SQL is the standared language for dealing with relational databases
+    SQL is used to insert, search, update and delete db records
+    SQL is not case sensitive
+
+Semi colon after SQL statement:
+    mysql db requires semicolon at the end of each SQL statement.
+
+
+SELECT: it is used to select data from a database. the data returned is stored in a result table called the result-set.
+        SELECT col1, col2.....
+        from table_name;
+
+SELECT DISTINCT: used to return only distinct(different) values.
+        select distinct col1, col2,...
+        from table_name;
+
+        select count(distinct col1) from table;
+
+Where clause: it is used to filter records. to extract only those records that fulfill a specified condition.
+                it is used in SELECT, UPDATE and DELETE statements.
+
+        select col1, col2,...
+        from table_name 
+        where condition;
+
+
+
