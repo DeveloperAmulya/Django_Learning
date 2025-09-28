@@ -177,4 +177,100 @@ Request Body
             has HTMLResponse class defined in fastapi.responses module.
             we need to add response_class as an additional parameter to operation decorator with Html response obj as value.
 
-            
+            Rendering raw html response is difficult alternatively it is possible to render prebuilt HTML pages as templates.
+            to do this we need template library.
+
+            web template lib has template engine that merges a static web page having place holder variables.
+            data from any source such as db is merged to dynamically generate and render web page.
+
+            FastAPI supports jinja2Templates class defined in fastapi.templates module.
+
+            {% %} - statements
+            { { }} - Expressions to print to the template output
+            {# #} - Comments which are not included in the template output
+            # # # - Line statements.
+
+Static Files:
+    it is required to include in the template response some resources that remain unchanged even if there is a certain dynamic data.
+    such resources are called static assets.
+    media files javascript files to be used for executing some front end code or stylesheets for formatting HTML. are the examples of static files.
+
+Accessing form data:
+    html form data can be accessed in a FastAPI operation function.
+            @app.post("/submit/")
+            async def submit(nm : str = Form(...), pwd : str = Form(...)):
+                return {"username" : nm}
+
+Uploading files: 
+    to send a file to the server you need to use HTML forms as multipart/form-data and use input type as the file to render a button
+    which means clicked allows you to select a file from file system.
+
+            from fastapi import FastAPI, File, UploadFile, Request
+            import uvicorn
+            import shutil
+            from fastapi.responses import HTMLResponse
+            from fastapi.templating import jinja2Templates
+            app = FastAPI()
+            templates = Jinja2Templates(dictionary='templates')
+
+            @app.get("/upload/", response_class=HTMLResponse)
+            async def upload(request: Request):
+                return templates.TemplateResponse("uploadfile.html", {"request":request})
+
+Cookie Parameter:
+    A cookie is one of the HTTP headers. the web server sends a response to the client in addition to the data requested it also inserts one or more cookies.
+    A cookie is very small amout of data that is stored in the clients machine. 
+
+    the cookies are useful for recording information about clients browsing. 
+    cookies are relaible method of retrieving stateful information in otherwise stateless communication by HTTP protocol.
+
+    in FastAPI the cookie parameter is set on the response object with help of set_cookie() method.
+
+Head Parameter : 
+    in order to read values of HTTP header that is a part of client request import the header object from FastAPI library
+    and declare a parameter of Header type in operation function defination.
+
+    the name of the parameter should match with HTTP header converted in Camel_case
+
+                from typing import optional 
+                from fastapi import FastAPI, Header
+
+                app = FastAPI()
+                @app.get("/headers/")
+                async def read_header(accept_language:Operional[str]=Header(None)):
+                    return {"Accept-Language": accept_language}
+
+Response Model: 
+    an operation function returns A JSON response to the client.
+    the response can be in the form of python primary types like (numbers, list, dict, str).
+    it can also be a pydantic model
+    for a function to return a model object the operation decorator should declare a response_model parameter.
+
+    with the help of response model fastapi converts the output data to structure of model class.
+    it validates the data, add a JSON schema for the response in the OpenAPI path operation.
+    one of the imp adv of response_model parameter is that we can format the output by selecting the fields
+    from the model to cast the response to an output model.
+
+            from typing import List
+            from fastapi import FastAPI 
+            from pydantic import BaseModel, Field
+
+            app = FastAPI()
+            class student(BaseModel):
+                id: int 
+                name:str = Field(None, title="name of the student", max_length=10)
+                marks: List[int] = []
+                percent_marks : FLOAT
+            class percent(BaseModel):
+                id:int
+                name:str = Field(None, title = "name of the student", max_length=10)
+                percent_marks: FLOAT
+            @app.post("/marks", response_model=percent)
+            async def get_percent(s1:student):
+                s1.percent_marks(s1.marks)/2
+                return s1
+        
+
+
+
+
