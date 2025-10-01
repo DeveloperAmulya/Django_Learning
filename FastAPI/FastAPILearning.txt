@@ -270,7 +270,33 @@ Response Model:
                 s1.percent_marks(s1.marks)/2
                 return s1
         
+Nested Models: 
+    each attribute of pydantic model has a type.
+    the type can be built in python type or a model.
+    hence it is possible to declare nested JSON "object" with specific attribute names, types, validations.
 
+            from typing import Tuple 
+            from fastapi import FastAPI 
+            from pydantic import BaseMOdel 
+            
+            app = FastAPI()
+            class supplier(BaseModel):
+                supplierID : int
+                supplierName:str
+            class product(BaseModel):
+                productID:int
+                prodname:str
+                price:int
+                supp:supplier
+            class customer(BaseModel):
+                custID:int
+                customer:str
+                prod:Tuple[product]
+            
+            @app.post('/invoice')
+            async def getInvoice(c1.customer):
+                return c1
+                
 
 
 

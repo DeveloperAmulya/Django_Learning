@@ -1,0 +1,166 @@
+What is Pandas?
+    it is a python library used for working with data sets.
+    it has functions for analyzing, cleaning, exploring and manipulating data
+    the name "pandas" has a reference to both "panel data" and "python data analysis"
+        and was created by WesKinney in 2008
+
+Why use pandas?
+    Pandas allows us to analyze big data and make conclusions based on statistical thoeries.
+    pandas can clean messy data sets, make them readable and relevant.
+    relevant data is very important in data science.
+
+Data Science: is a branch of computer science where we study how to store, use and analyze data for deriving information from it.
+
+What can pandas Do ?
+    Pandas gives you answers about the data. Like:
+        is there a correlation between two or more columns?
+        what is avarage value?
+        max value?
+        min value?
+    Pandas are also able to delete rows that are not relevant, or contains wrong values like empty or NULL values
+    this is called cleaning data.
+
+What is a Series?
+    A pandas Series is like a column in a table 
+    it is a one-dimensional array holding data of any type.
+
+Labels:
+    if nothing else is specified the values are labeled with their index number.
+    First value has index 0, second value has index 1 etc.
+
+    this label can be used to access a specified value.
+
+Create Labels:
+    with the index argument you can name your own labels.
+
+Key/Value Objects as Series
+    you can also use a key/value object like a dictionary when creating a Series
+    the keys of the dictionary become the labels.
+
+to select only some of the items in the dictionary use the index arg and specify only the items 
+you want to include in the series.
+
+Dataframes:
+    data sets in pandas are usually multi-dimensional tables called dataframes.
+    Series is like a column a dataframe is the whole table.
+
+What is a Dataframe?
+    A pandas Dataframe is a 2 dimensional data structure like a 2 dimensional array or a table with rows and columns.
+
+Locate Row?
+    dataframe is like a table with rows and columns 
+    pandas use the loc attribute to return one or more specified rows(s)
+
+Named Indexes:
+    with the index argument you can name your own indexes.
+    Add a list of names to give each row a name:
+        import pandas as pandas
+        
+        data = {
+            "calories": [420, 380, 390],
+            "duration": [50,40,45]
+        }
+
+        df = pd.dataframe(data, index=["day1","day2", "day3"])
+
+        print(df)
+
+Locate Named Indexes:
+    use the named index in the loc attribute to return the specified row
+        Return "day2":
+
+        print(df.loc["day2"])
+
+Load Files into a DataFrame:
+    if your data sets are stored in a file, pandas can load them into a DataFrame.
+
+        import pandas as pd 
+        df = pd.read_csv('data.csv')
+        print(df)
+
+Read CSV Files
+    A simple way to store big data sets is to use CSV files(Comma seperated files)
+    CSV files contaim plain text and is a well know format can be read by everyone including pandas
+    if you have a large dataframe with many rows pandas will only return the first 5 rows and last 5 rows
+
+max rows
+    the no of rows returned is defined in pandas option settings 
+            pd.options.display.max_rows
+    
+    In my system the number is 60, which means that if the DataFrame contains more than 60 rows, the print(df) 
+    statement will return only the headers and the first and last 5 rows.
+
+
+Read JSON
+    Big data sets are often stored or extracted as JSON
+    JSON is plain text but has the format of an object and is well known in the world of 
+    programming including pandas.
+
+            import pandas as pd 
+            
+            df = pd.read_json('data.json')
+            print(df.to_string())
+
+dictionary as json
+    JSON = Python dictionary
+    JSON objects have the same format as Python dictionaries
+
+If your JSON code is not in a file but in a python dictionary you can load it into a DataFrame directly
+
+
+Viewing the Data:
+    one of the most used method for getting a quick overview of the dataframe is the head() method.
+
+    The head() method returns the headers and a specified no of rows starting from the top
+
+    if the no of rows is not specified the head() method will return the top 5 rows
+
+    there is also a tail() method for viewing the last rows of the dataframe
+    the tail() method returns the headers and specified no of rows starting from the bottom.
+
+Info About the data:
+    the dataframe object has a method called info() that gives you more information about the data set.
+            print information about the data:
+                print(df.info())
+
+Null Values: 
+    the info() method also tells us how many Non-Null values there are present in each column and in our data set it seems 
+    like there are 164 of 169 non-null values in the Calories column
+
+    which means that 5 rows with no value at all in the Calories column for whatever reason.
+
+    Empty values or Null values can be bad when analyzing data and you should consider removing rows with empty values.
+    this is a step towards cleaning data.
+
+Cleaning Data :
+    Data cleaning means fixing bad data in your dataset
+        Bad data could be: 
+            Empty cells
+            Data in wrong format
+            wrong data 
+            Duplicates
+        Empty cells:
+            these can potentially give you a wrong result when you analyze data.
+
+        Remove Rows:
+            One way to deal with empty cells is to remove rows that contain empty cells
+            this is usually OK since data sets can be very big and removing a few rows will not have a big impact on the result.
+
+            dropna() method returns a new dataframe and will not change the original.
+            if you want to change the original dataframe use inplace=True argument.
+
+            Now the dropna(inplace=True) will NOT return a new dataframe but it will remove all rows contianing NULL values from 
+            original dataframe.
+
+        Replace empty values:
+            Another way of dealing with empty cells is to insert a new value instead.
+            this way you do not have to delete entire rows just because of some empty cells.
+            the fillna() method allows us to replace empty cells with a value.
+                        import pandas as pd
+
+                        df = pd.read_csv('data.csv')
+                        df.fillna(120, inplace = True)
+
+        Replace only for specified columns:
+            above example will replave all empty cells in the whole data frame 
+            

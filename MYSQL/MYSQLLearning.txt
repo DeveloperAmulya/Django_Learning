@@ -98,3 +98,14 @@ UPDATE:
 UPDATE MULTIPLE RECORDS:
         it is the where clause that determined how many records will be updated.
 
+Delete statement:
+    the delete statement is used to delete existing records in a table 
+    be careful when deleting records in table notice where clause in the delete statement.
+    the where clause specifies which records should be deleted. if you omit where clause 
+    all records in table will be deleted.
+
+    delete all records:
+        delete from table_name;
+    
+    delete records using where clause:
+        delete from table where col;
